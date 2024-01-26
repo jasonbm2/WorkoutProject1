@@ -1,17 +1,30 @@
 #Jason Martin
 #90501948
+
+#simple program that streams about 1kb of text at a time from an input file, reverses it, and writes it to an output file.
+
 import argparse
 CHUNK_SIZE = 1024
 
-def write(reverse_text):
-    pass
+def write(reverse_text, output_file):
+    current_chunk = reverse_text[:CHUNK_SIZE]
+    counter = 1
+    with open(output_file, "w") as f_out:
+        while True:
+            f_out.write(current_chunk)
+            current_chunk = reverse_text[CHUNK_SIZE * counter: CHUNK_SIZE * (counter + 1)]
+            counter += 1
+            if not current_chunk:
+                break
+
+
 
 def reverse_text(input_file):
     reverse_chunk = ""
     reverse_text = ""
-    with open(input_file, "r") as f:
+    with open(input_file, "r") as f_in:
         while True:
-            chunk = f.read(CHUNK_SIZE)
+            chunk = f_in.read(CHUNK_SIZE)
             #exit the loop when the end of the file is reached
             if not len(chunk) > 0:
                 break
