@@ -3,25 +3,22 @@
 import argparse
 CHUNK_SIZE = 1024
 
-def write(input_file, output_file):
-    with open(output_file, "w") as f_out:
+def write(reverse_text):
+    pass
+
+def reverse_text(input_file):
+    reverse_chunk = ""
+    reverse_text = ""
+    with open(input_file, "r") as f:
         while True:
-            chunk = read(input_file)
-            #exit the loop when input_file is completely read
-            if chunk == None:
+            chunk = f.read(CHUNK_SIZE)
+            #exit the loop when the end of the file is reached
+            if not len(chunk) > 0:
                 break
-            f_out.seek(0,0) #moves cursor to beginning of write file
-            f_out.write(chunk)
 
-
-def read(input_file):
-    reversed_chunk = ""
-    with open(input_file, "r") as f_in:
-        chunk = f_in.read(CHUNK_SIZE)
-        if not chunk:
-            return None #end of file reached
-        reversed_chunk = chunk[::-1]
-    return reversed_chunk
+            reverse_chunk = chunk[::-1]
+            reverse_text = reverse_chunk + reverse_text
+    return reverse_text
 
 
 def take_input():
@@ -37,7 +34,7 @@ def take_input():
 
 def main():
     input_file, output_file = take_input()
-    write(input_file, output_file)
+    write(reverse_text(input_file), output_file)
 
 if __name__ == "__main__":
     main()
