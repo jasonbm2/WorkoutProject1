@@ -4,19 +4,22 @@ import argparse
 CHUNK_SIZE = 1024
 
 def write(input_file, output_file):
-    with open(output_file, "w") as f:
+    with open(output_file, "w") as f_out:
         while True:
-            #exit the loop when the end of the file is reached
-            if not len(chunk) > 0:
+            chunk = read(input_file)
+            #exit the loop when input_file is completely read
+            if chunk == None:
                 break
-            
-            #reversed_text = reverse_chunk + reverse_text'''
+            f_out.seek(0,0) #moves cursor to beginning of write file
+            f_out.write(chunk)
 
 
 def read(input_file):
     reversed_chunk = ""
-    with open(input_file, "r") as f:
-        chunk = f.read(CHUNK_SIZE)
+    with open(input_file, "r") as f_in:
+        chunk = f_in.read(CHUNK_SIZE)
+        if not chunk:
+            return None #end of file reached
         reversed_chunk = chunk[::-1]
     return reversed_chunk
 
