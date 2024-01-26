@@ -1,10 +1,25 @@
 #Jason Martin
 #90501948
 import argparse
+CHUNK_SIZE = 1024
 
-def reverse_text(input_file, output_file):
+def write(reverse_text):
+    pass
+
+def reverse_text(input_file):
+    reverse_chunk = ""
+    reverse_text = ""
     with open(input_file, "r") as f:
-        current_line = f.readline()
+        while True:
+            chunk = f.read(CHUNK_SIZE)
+            #exit the loop when the end of the file is reached
+            if not len(chunk) > 0:
+                break
+
+            reverse_chunk = chunk[::-1]
+            reverse_text = reverse_chunk + reverse_text
+    return reverse_text
+
 
 def take_input():
     parser = argparse.ArgumentParser()
@@ -19,7 +34,7 @@ def take_input():
 
 def main():
     input_file, output_file = take_input()
-    reverse_text(input_file, output_file)
+    write(reverse_text(input_file), output_file)
 
 if __name__ == "__main__":
     main()
