@@ -3,22 +3,22 @@
 import argparse
 CHUNK_SIZE = 1024
 
-def write(reverse_text):
-    pass
-
-def reverse_text(input_file):
-    reverse_chunk = ""
-    reverse_text = ""
-    with open(input_file, "r") as f:
+def write(input_file, output_file):
+    with open(output_file, "w") as f:
         while True:
-            chunk = f.read(CHUNK_SIZE)
             #exit the loop when the end of the file is reached
             if not len(chunk) > 0:
                 break
+            
+            #reversed_text = reverse_chunk + reverse_text'''
 
-            reverse_chunk = chunk[::-1]
-            reverse_text = reverse_chunk + reverse_text
-    return reverse_text
+
+def read(input_file):
+    reversed_chunk = ""
+    with open(input_file, "r") as f:
+        chunk = f.read(CHUNK_SIZE)
+        reversed_chunk = chunk[::-1]
+    return reversed_chunk
 
 
 def take_input():
@@ -34,7 +34,7 @@ def take_input():
 
 def main():
     input_file, output_file = take_input()
-    write(reverse_text(input_file), output_file)
+    write(input_file, output_file)
 
 if __name__ == "__main__":
     main()
